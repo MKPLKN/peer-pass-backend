@@ -1,0 +1,57 @@
+{
+  "name": "peer-pass-backend",
+  "version": "1.0.0",
+  "description": "Backend for PeerPass - your digital life manager. Pure P2P. You have a full control. Everything is encrypted by default.",
+  "scripts": {
+    "test": "standard && node tests/all.js",
+    "test:auth": "node src/modules/auth/tests/all.js",
+    "test:user": "node src/modules/user/tests/all.js",
+    "test:password": "node src/modules/password/tests/all.js",
+    "test:dht": "node src/modules/dht/tests/all.js",
+    "test:database": "node src/modules/database/tests/all.js",
+    "test:generate": "brittle -r tests/all.js tests/*.js",
+    "test:generate:modules": "brittle -r tests/all.js src/modules/*/tests/*/*.js",
+    "test:generate:auth": "brittle -r src/modules/auth/tests/all.js src/modules/auth/tests/*/*.js",
+    "test:generate:user": "brittle -r src/modules/user/tests/all.js src/modules/user/tests/*/*.js",
+    "test:generate:password": "brittle -r src/modules/password/tests/all.js src/modules/password/tests/*/*.js",
+    "test:generate:dht": "brittle -r src/modules/dht/tests/all.js src/modules/dht/tests/*/*.js",
+    "test:generate:database": "brittle -r src/modules/database/tests/all.js src/modules/database/tests/*/*.js",
+    "lint": "standard --fix"
+  },
+  "standard": {
+    "globals": [
+      "Pear"
+    ]
+  },
+  "keywords": [
+    "holepunch",
+    "hypercore",
+    "peer-pass",
+    "password manager",
+    "pear runtime",
+    "p2p"
+  ],
+  "author": {
+    "name": "MKPLKN",
+    "email": "15703708+MKPLKN@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "brittle": "^3.3.2",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "standard": "^17.1.0"
+  },
+  "overrides": {},
+  "dependencies": {
+    "awilix": "^10.0.1",
+    "hyperdht": "^6.11.3",
+    "hyperswarm": "^4.7.13",
+    "joi": "^17.12.0",
+    "p2p-auth": "^0.0.10",
+    "p2p-resources": "^0.0.12",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "ws": "^8.16.0"
+  }
+}
