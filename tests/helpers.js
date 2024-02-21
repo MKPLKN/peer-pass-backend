@@ -7,6 +7,9 @@ const { setConfig: setAuthConfig, loadConfigs: loadAuthConfig, createUser } = re
 const { loadConfigs: loadResourceConfig, setConfig: setResourceConfig } = require('p2p-resources')
 
 function beforeStart () {
+  process.env.OPSLIMIT = 1
+  process.env.MEMLIMIT = 8192
+
   setAuthConfig('usersLocation', './tests/users')
   loadAuthConfig()
 
