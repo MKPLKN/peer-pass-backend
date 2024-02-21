@@ -14,11 +14,26 @@ class AuthModule {
   }
 }
 
+class AuthFacade {
+  constructor ({ authController }) {
+    this.controller = authController
+  }
+
+  async login (payload) {
+    return await this.controller.login(payload)
+  }
+
+  async create (payload) {
+    return await this.controller.login(payload)
+  }
+}
+
 function registerModule (container) {
   container.register({
     authModule: awilix.asClass(AuthModule).singleton(),
     authController: awilix.asClass(AuthController).singleton(),
-    authService: awilix.asClass(AuthService).singleton()
+    authService: awilix.asClass(AuthService).singleton(),
+    authFacade: awilix.asClass(AuthFacade).singleton()
   })
 }
 
