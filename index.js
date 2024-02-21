@@ -13,5 +13,6 @@ setup()
  *
  */
 const authFacade = container.resolve('authFacade')
+const userFacade = container.resolve('userFacade')
 
-module.exports = { authFacade }
+module.exports = { authFacade, userFacade }

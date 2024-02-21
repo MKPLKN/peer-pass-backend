@@ -26,13 +26,28 @@ class UserModule {
   }
 }
 
+class UserFacade {
+  constructor ({ userController }) {
+    this.controller = userController
+  }
+
+  async get () {
+    return await this.controller.get()
+  }
+
+  async create (payload) {
+    return await this.controller.create(payload)
+  }
+}
+
 function registerModule (container) {
   container.register({
     userModule: awilix.asClass(UserModule).singleton(),
     userController: awilix.asClass(UserController).singleton(),
     userService: awilix.asClass(UserService).singleton(),
     userRepository: awilix.asClass(UserRepository).singleton(),
-    userFactory: awilix.asClass(UserFactory).singleton()
+    userFactory: awilix.asClass(UserFactory).singleton(),
+    userFacade: awilix.asClass(UserFacade).singleton()
   })
 }
 
