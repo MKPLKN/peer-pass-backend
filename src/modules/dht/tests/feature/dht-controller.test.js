@@ -1,10 +1,10 @@
-const crypto = require('node:crypto')
 const test = require('brittle')
 const { removeUsers, beforeEach, freshUserSetup } = require('../../../../../tests/helpers.js')
 const { createTestApplication } = require('../../../../boot.js')
 const DHTFactory = require('../../dht-factory.js')
 const awilix = require('awilix')
 const { FakeSocket } = require('../fake-dht-factory.js')
+const { randomBytes } = require('hypercore-crypto')
 
 const username = 'test-user'
 const password = 'password'
@@ -80,7 +80,7 @@ test('dht/connect - it connects the users DHT node to the given pubkey', async (
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
 
-  const pubkey = crypto.randomBytes(32).toString('hex')
+  const pubkey = randomBytes(32).toString('hex')
   const repository = app.container.resolve('dhtRepository')
   const dhtController = app.container.resolve('dhtController')
   const eventService = app.container.resolve('eventService')
