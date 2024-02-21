@@ -1,4 +1,4 @@
-const { EventEmitter } = require('node:events')
+const { EventEmitter } = require('bare-events')
 
 module.exports = class EventService extends EventEmitter {
   constructor () {

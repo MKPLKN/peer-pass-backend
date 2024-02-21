@@ -45,11 +45,13 @@
   "overrides": {},
   "dependencies": {
     "awilix": "^10.0.1",
+    "bare-events": "^2.2.0",
+    "hypercore-crypto": "^3.4.0",
     "hyperdht": "^6.11.3",
     "hyperswarm": "^4.7.13",
     "joi": "^17.12.0",
-    "p2p-auth": "^0.0.10",
-    "p2p-resources": "^0.0.12",
+    "p2p-auth": "^2.0.0",
+    "p2p-resources": "^1.0.0",
     "uuid": "^9.0.1",
     "winston": "^3.11.0",
     "ws": "^8.16.0"
