@@ -4,7 +4,7 @@ const baseSchema = Joi.object({
   title: Joi.string().required(),
   identifier: Joi.string().allow(''),
   password: Joi.string().allow(''),
-  websites: Joi.array().items(Joi.string().domain({ tlds: { allow: true } }).allow('')),
+  websites: Joi.array().items(Joi.string().uri({ scheme: ['http', 'https'] }).allow('')),
   note: Joi.string().allow('')
 })
 
