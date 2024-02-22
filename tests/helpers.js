@@ -6,14 +6,14 @@ const execProm = promisify(exec)
 const { setConfig: setAuthConfig, loadConfigs: loadAuthConfig, createUser } = require('p2p-auth')
 const { loadConfigs: loadResourceConfig, setConfig: setResourceConfig } = require('p2p-resources')
 
-function beforeStart () {
+function beforeStart (dir = './tests') {
   process.env.OPSLIMIT = 1
   process.env.MEMLIMIT = 8192
 
-  setAuthConfig('usersLocation', './tests/users')
+  setAuthConfig('usersLocation', `${dir}/users`)
   loadAuthConfig()
 
-  setResourceConfig('resourcesLocation', './tests/resources')
+  setResourceConfig('resourcesLocation', `./${dir}/resources`)
   loadResourceConfig()
 }
 

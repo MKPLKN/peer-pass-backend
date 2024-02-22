@@ -1,4 +1,5 @@
 const { createApplication } = require('./src/boot')
+const { beforeStart: helpersBeforeStart } = require('./tests/helpers')
 
 /**
  * Create container
@@ -15,4 +16,9 @@ setup()
 const authFacade = container.resolve('authFacade')
 const userFacade = container.resolve('userFacade')
 
-module.exports = { authFacade, userFacade }
+module.exports = { authFacade, userFacade, beforeStart }
+
+function beforeStart (opts = {}) {
+  const dir = opts.devUsersDir
+  helpersBeforeStart(dir)
+}
