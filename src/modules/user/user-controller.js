@@ -8,6 +8,8 @@ async function validateUserCreationPayload (payload) {
     throw new Error('Passwords do not match')
   }
 
+  if (!username || !password || !confirmPassword) throw new Error('Invalid payload')
+
   // 2) Username should not exist
   if (await usernameExists(username)) {
     throw new Error('Username already exists')
