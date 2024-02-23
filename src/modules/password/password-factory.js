@@ -16,6 +16,10 @@ module.exports = class PasswordFactory {
     // High resolution
     attributes.updatedAtHr = nowHr
     attributes.createdAtHr = nowHr
+    // Default
+    if (!attributes.websites) {
+      attributes.websites = []
+    }
     return (new Password()).make(attributes)
   }
 }

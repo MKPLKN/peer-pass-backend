@@ -7,8 +7,7 @@ module.exports = class Password {
       'identifier',
       'password',
       'websites',
-      'note',
-      'updatedAt'
+      'note'
     ])
   }
 

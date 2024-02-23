@@ -15,8 +15,9 @@ setup()
  */
 const authFacade = container.resolve('authFacade')
 const userFacade = container.resolve('userFacade')
+const passwordFacade = container.resolve('passwordFacade')
 
-module.exports = { authFacade, userFacade, beforeStart }
+module.exports = { authFacade, userFacade, passwordFacade, beforeStart }
 
 function beforeStart (opts = {}) {
   const dir = opts.devUsersDir

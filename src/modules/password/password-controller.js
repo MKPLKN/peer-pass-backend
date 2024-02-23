@@ -7,6 +7,21 @@ module.exports = class PasswordController {
     this.logger = logger
   }
 
+  async findById (event, payload) {
+    return this.find(event, payload)
+  }
+
+  async find (event, payload) {
+    try {
+      if (!payload) payload = event
+      const password = await this.passwordService.find(payload)
+      return { success: true, item: password }
+    } catch (error) {
+      this.logger.error(`Password find failed: ${error.message}`, { error })
+      return { success: false, error }
+    }
+  }
+
   async index (event, payload) {
     try {
       if (!payload) payload = event

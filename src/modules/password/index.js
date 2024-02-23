@@ -24,13 +24,44 @@ class PasswordModule {
   }
 }
 
+class PasswordFacade {
+  constructor ({ passwordController }) {
+    this.controller = passwordController
+  }
+
+  async find (id) {
+    return await this.controller.find(id)
+  }
+
+  async findById (id) {
+    return await this.controller.findById(id)
+  }
+
+  async index (payload) {
+    return await this.controller.index(payload)
+  }
+
+  async create (payload) {
+    return await this.controller.create(payload)
+  }
+
+  async update (payload) {
+    return await this.controller.update(payload)
+  }
+
+  async destroy (payload) {
+    return await this.controller.destroy(payload)
+  }
+}
+
 function registerModule (container) {
   container.register({
     passwordModule: awilix.asClass(PasswordModule).singleton(),
     passwordController: awilix.asClass(PasswordController).singleton(),
     passwordService: awilix.asClass(PasswordService).singleton(),
     passwordRepository: awilix.asClass(PasswordRepository).singleton(),
-    passwordFactory: awilix.asClass(PasswordFactory).singleton()
+    passwordFactory: awilix.asClass(PasswordFactory).singleton(),
+    passwordFacade: awilix.asClass(PasswordFacade).singleton()
   })
 }
 

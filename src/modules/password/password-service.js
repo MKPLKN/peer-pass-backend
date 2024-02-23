@@ -4,6 +4,15 @@ module.exports = class PasswordService {
     this.factory = passwordFactory
   }
 
+  async find (id) {
+    const password = await this.repository.find(id)
+    return password
+  }
+
+  async findById (id) {
+    return this.find(id)
+  }
+
   async index (key) {
     const passwords = await this.repository.getAll(key)
 
