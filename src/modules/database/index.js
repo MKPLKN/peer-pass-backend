@@ -5,6 +5,7 @@ const HandyBeeAdapter = require('./adapters/handybee-adapter')
 const HandyBeeFactory = require('./factories/handybee-factory')
 const SwarmReplication = require('./replication/swarm-replication')
 const ResplicationState = require('./replication/replication-state')
+const DatabaseFacade = require('./database.facade')
 
 class DatabaseModule {}
 
@@ -13,6 +14,7 @@ function registerModule (container) {
     databaseModule: awilix.asClass(DatabaseModule).singleton(),
     databaseController: awilix.asClass(DatabaseController).singleton(),
     databaseService: awilix.asClass(DatabaseService).singleton(),
+    databaseFacade: awilix.asClass(DatabaseFacade).singleton(),
     // Replication
     replicationManager: awilix.asClass(SwarmReplication).singleton(),
     replicationState: awilix.asClass(ResplicationState).singleton(),
