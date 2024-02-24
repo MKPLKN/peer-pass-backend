@@ -15,8 +15,7 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
   }
 
   getActiveMasterDatabase () {
-    const user = this.storage.get('user')
-    return user.masterDb
+    return this.getActiveDatabase()
   }
 
   _parseQuery (query) {

@@ -20,10 +20,9 @@ test('dht/create - it creates a new DHT node for the user', async (t) => {
   const response = await app.container.resolve('dhtController').create(payload)
   t.ok(response.success, 'DHT creation response is success')
 
-  const resource = await user.masterDb.findResourceByName(payload.name)
+  const resource = await user.db.findResourceByName(payload.name)
   t.alike(payload.name, resource.details.name)
   t.alike(response.details.key, resource.details.key)
-  t.ok(user.db.key !== user.masterDb.key, 'User has two different databases')
 
   await removeUsers()
 })

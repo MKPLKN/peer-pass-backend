@@ -17,14 +17,14 @@ module.exports = class UserService {
   }
 
   async initializeSession ({ username, keyPair }) {
-    const { db, masterDb } = await this.repository.initializeUserDatabases({ keyPair })
-    const user = this.make({ username, keyPair, db, masterDb })
+    const { db } = await this.repository.initializeUserDatabases({ keyPair })
+    const user = this.make({ username, keyPair, db })
     this.setUser(user)
     return user
   }
 
-  make ({ username, keyPair, db, masterDb }) {
-    return this.userFactory.create({ username, keyPair, db, masterDb })
+  make ({ username, keyPair, db }) {
+    return this.userFactory.create({ username, keyPair, db })
   }
 
   getUser () {

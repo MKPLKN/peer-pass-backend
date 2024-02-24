@@ -1,9 +1,8 @@
 module.exports = class User {
-  constructor ({ username, keyPair, db, masterDb }) {
+  constructor ({ username, keyPair, db }) {
     this.username = username
     this.keyPair = keyPair
     this.database = db
-    this.masterDb = masterDb
   }
 
   get isAuthenticated () {
