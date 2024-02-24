@@ -1,6 +1,7 @@
 const awilix = require('awilix')
 const AuthController = require('./auth-controller')
 const AuthService = require('./auth-service')
+const AuthFacade = require('./auth-facade')
 
 class AuthModule {
   constructor ({ ipc, authController }) {
@@ -11,20 +12,6 @@ class AuthModule {
   registerRoutes () {
     this.ipc.handle('auth/login', (event, payload) => this.controller.login(payload))
     this.ipc.handle('auth/restore', (event, payload) => this.controller.restore(payload))
-  }
-}
-
-class AuthFacade {
-  constructor ({ authController }) {
-    this.controller = authController
-  }
-
-  async login (payload) {
-    return await this.controller.login(payload)
-  }
-
-  async create (payload) {
-    return await this.controller.login(payload)
   }
 }
 

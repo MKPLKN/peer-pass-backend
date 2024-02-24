@@ -4,6 +4,7 @@ const UserService = require('./user-service')
 const UserRepository = require('./user-repository')
 const UserFactory = require('./user-factory')
 const UserController = require('./user-controller')
+const UserFacade = require('./user-facade')
 
 class UserModule {
   constructor ({ ipc, eventService, userService, userController }) {
@@ -23,20 +24,6 @@ class UserModule {
   registerRoutes () {
     this.ipc.handle('user/get', () => this.controller.get())
     this.ipc.handle('user/create', (event, payload) => this.controller.get(payload))
-  }
-}
-
-class UserFacade {
-  constructor ({ userController }) {
-    this.controller = userController
-  }
-
-  async get () {
-    return await this.controller.get()
-  }
-
-  async create (payload) {
-    return await this.controller.create(payload)
   }
 }
 
