@@ -5,6 +5,18 @@ module.exports = class DatabaseController {
     this.databaseService = databaseService
   }
 
+  // @TODO: write tests
+  async getInfo (payload) {
+    try {
+      const info = await this.databaseService.getInfo()
+
+      return { success: true, info }
+    } catch (error) {
+      this.logger.error(`Get keys failed: ${error.message}`, { error })
+      return { success: false }
+    }
+  }
+
   async replicate (event = {}, payload) {
     try {
       if (!payload) payload = event

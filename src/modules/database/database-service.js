@@ -17,6 +17,10 @@ module.exports = class DatabaseService {
     return this.adapter.getActiveMasterDatabase()
   }
 
+  async getInfo () {
+    return this.adapter.getInfo()
+  }
+
   async query (query) {
     return this.adapter.query(query)
   }

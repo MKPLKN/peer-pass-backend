@@ -17,4 +17,11 @@ module.exports = class HandyBee extends Database {
   get key () {
     return this.db.key.toString('hex')
   }
+
+  getInfo () {
+    return {
+      key: this.key,
+      discoveryKey: this.discoveryKey.toString('hex')
+    }
+  }
 }

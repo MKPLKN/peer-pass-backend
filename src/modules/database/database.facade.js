@@ -3,6 +3,10 @@ module.exports = class DatabaseFacade {
     this.controller = databaseController
   }
 
+  async getInfo (payload) {
+    return await this.controller.getInfo(payload)
+  }
+
   async replicate (payload) {
     return await this.controller.replicate(payload)
   }

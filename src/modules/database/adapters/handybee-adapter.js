@@ -18,6 +18,11 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
     return this.getActiveDatabase()
   }
 
+  getInfo () {
+    const db = this.getActiveDatabase({ model: true })
+    return db.getInfo()
+  }
+
   _parseQuery (query) {
     const { model, where } = query
     const result = []
