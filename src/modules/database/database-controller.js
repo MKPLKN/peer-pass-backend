@@ -5,18 +5,6 @@ module.exports = class DatabaseController {
     this.databaseService = databaseService
   }
 
-  async index (event, payload) {
-    try {
-      if (!payload) payload = event
-
-      const list = await this.databaseService.index()
-
-      return { success: true, items: list }
-    } catch (error) {
-      return { success: false }
-    }
-  }
-
   async replicate (event = {}, payload) {
     try {
       if (!payload) payload = event
