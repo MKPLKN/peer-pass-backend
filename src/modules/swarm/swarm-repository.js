@@ -1,3 +1,4 @@
+const { getKeyChain } = require('p2p-auth')
 const { createSwarm } = require('p2p-resources')
 
 module.exports = class SwarmRepository {
@@ -23,7 +24,11 @@ module.exports = class SwarmRepository {
 
   async create (attributes) {
     const { name, dht } = attributes
-    const { details } = await createSwarm(this.databaseService.getActiveMasterDatabase(), { name, dht })
+
+    const db = this.databaseService.getActiveMasterDatabase()
+    const getKeyPair = (name) => getKeyChain(db.core.keyPair).get(name)
+    const { details } = await createSwarm(db, { name, getKeyPair, dht })
+
     return { details }
   }
 

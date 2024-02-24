@@ -1,3 +1,4 @@
+const { getKeyChain } = require('p2p-auth')
 const { createNode } = require('p2p-resources')
 
 module.exports = class DHTRepository {
@@ -33,7 +34,9 @@ module.exports = class DHTRepository {
   async create (attributes) {
     const { name, bootstrap, setAsDefault } = attributes
 
-    const { details } = await createNode(this.databaseService.getActiveMasterDatabase(), { name, bootstrap: bootstrap || null })
+    const db = this.databaseService.getActiveMasterDatabase()
+    const getKeyPair = (name) => getKeyChain(db.core.keyPair).get(name)
+    const { details } = await createNode(db, { name, getKeyPair, bootstrap: bootstrap || null })
     if (details && details.resourceKey && setAsDefault) {
       await this.setDefaultDhtKey(details.resourceKey)
     }
