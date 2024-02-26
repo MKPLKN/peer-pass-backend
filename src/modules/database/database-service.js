@@ -21,6 +21,10 @@ module.exports = class DatabaseService {
     return this.adapter.getInfo()
   }
 
+  async teardown () {
+    return this.adapter.teardown()
+  }
+
   async query (query) {
     return this.adapter.query(query)
   }

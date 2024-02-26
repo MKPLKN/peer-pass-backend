@@ -157,4 +157,12 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
       databaseModel: this.getActiveDatabase({ model: true })
     })
   }
+
+  async teardown () {
+    const db = this.getActiveDatabase({ model: true })
+    if (db && db.swarm) {
+      await db.swarm.hyperswarm.destroy()
+      console.log('Destroyed!')
+    }
+  }
 }

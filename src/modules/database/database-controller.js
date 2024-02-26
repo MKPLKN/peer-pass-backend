@@ -17,6 +17,10 @@ module.exports = class DatabaseController {
     }
   }
 
+  async teardown () {
+    await this.databaseService.teardown()
+  }
+
   async replicate (event = {}, payload) {
     try {
       if (!payload) payload = event

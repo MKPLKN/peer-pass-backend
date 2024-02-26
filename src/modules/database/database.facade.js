@@ -7,6 +7,10 @@ module.exports = class DatabaseFacade {
     return await this.controller.getInfo(payload)
   }
 
+  async teardown (payload) {
+    return await this.controller.teardown(payload)
+  }
+
   async replicate (payload) {
     return await this.controller.replicate(payload)
   }
