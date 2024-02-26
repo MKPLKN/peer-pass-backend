@@ -134,6 +134,10 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
     return await this.getActiveMasterDatabase().findResourceByResourceKey(key)
   }
 
+  async findResourceByName (name) {
+    return await this.getActiveMasterDatabase().findResourceByName(name)
+  }
+
   replicationSupported () {
     return this.replicationManager.replicationSupported()
   }

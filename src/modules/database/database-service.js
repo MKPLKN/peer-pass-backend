@@ -57,6 +57,10 @@ module.exports = class DatabaseService {
     return await this.adapter.findResourceByResourceKey(key)
   }
 
+  async findResourceByName (key) {
+    return await this.adapter.findResourceByName(key)
+  }
+
   replicationSupported () {
     return this.adapter.replicationSupported()
   }
