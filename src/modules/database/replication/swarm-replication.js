@@ -95,12 +95,24 @@ module.exports = class SwarmReplication extends ReplicationManager {
 
   _checkUpdatedSwarm (databaseModel, { swarm }) {
     const { hyperswarm } = swarm
-    const connections = Array.from(hyperswarm.connections).map(conn => conn.remotePublicKey.toString('hex')).join(' && ')
+    const remoteKeys = Array.from(hyperswarm.connections).map(conn => conn.remotePublicKey.toString('hex'))
+    const connections = remoteKeys.join(' && ')
+    const updatedSwarm = {
+      key: swarm.key,
+      dbKey: databaseModel.key,
+      connections: remoteKeys,
+      replicationState: databaseModel.getReplicationState()
+    }
+    this.eventService.emit(`swarm:${swarm.key}:updated:${databaseModel.key}`, updatedSwarm)
     this.logger.info(`Swarm ${swarm.key} updated! Connections: ${hyperswarm.connections.size} | ${connections}. Database: ${databaseModel.key}`)
+    if (remoteKeys.length < 1) {
+      this.replicationState.stopped(databaseModel)
+    }
   }
 
   _handleReplication (databaseModel, { socket }) {
     databaseModel.db.replicate(socket)
+    databaseModel.db.core.download()
     this.replicationState.replicated(databaseModel)
 
     this.logger.info(`* New connection to replicate "${databaseModel.key}" from "${socket.remotePublicKey.toString('hex')}"`)
