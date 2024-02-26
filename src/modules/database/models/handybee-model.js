@@ -24,4 +24,13 @@ module.exports = class HandyBee extends Database {
       discoveryKey: this.discoveryKey.toString('hex')
     }
   }
+
+  getReplicationState () {
+    return {
+      replicated: this.replicated,
+      replication_status: this.replication_status,
+      replication_started_at: this.replication_started_at,
+      replication_stopped_at: this.replication_stopped_at
+    }
+  }
 }
