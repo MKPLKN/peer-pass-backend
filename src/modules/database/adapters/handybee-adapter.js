@@ -43,7 +43,7 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
         `${model}:id:${id}`,
         `${model}:updatedAt:${updatedAt}`,
         `${model}:createdAt:${createdAt}`,
-        // Hight resolution
+        // High resolution
         `${model}:updatedAtHr:${updatedAtHr}`,
         `${model}:createdAtHr:${createdAtHr}`
       ],
