@@ -16,6 +16,10 @@ module.exports = class DHTService {
     return await this.repository.create(attributes)
   }
 
+  async findByName (name) {
+    return await this.repository.findResourceByName(name).catch(error => ({ error }))
+  }
+
   async index () {
     const nodes = await this.repository.getAll()
 
@@ -40,16 +44,11 @@ module.exports = class DHTService {
     return newNode.details.resourceKey
   }
 
-  async findByResourceKey (key) {
-    return await this.repository.findByResourceKey(key)
-  }
-
   async initByKey (key) {
     const cacheKey = `dhtNodes.initialized.${key}`
     const fromCache = this.repository.getDht(cacheKey)
     if (fromCache) return fromCache
-
-    const resource = await this.findByResourceKey(key)
+    const resource = await this.repository.findByResourceKey(key, { skipCache: true })
     const dhtModel = this.factory.init(resource.details, resource.details.opts)
 
     this.repository.setDht(cacheKey, dhtModel)

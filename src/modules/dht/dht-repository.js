@@ -44,14 +44,12 @@ module.exports = class DHTRepository {
     return { details }
   }
 
-  async findByResourceKey (key) {
-    const resource = await this.databaseService.findResourceByResourceKey(key)
+  async findByResourceKey (key, opts = {}) {
+    return await this.databaseService.findResourceByResourceKey(key, opts)
+  }
 
-    if (!resource || !resource.details || !resource.details.opts) {
-      throw new Error(`Resource not found by resource key: ${key}`)
-    }
-
-    return resource
+  async findResourceByName (name) {
+    return await this.databaseService.findResourceByName(name)
   }
 
   async setDefaultDhtKey (key) {
