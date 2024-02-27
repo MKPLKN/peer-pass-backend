@@ -141,7 +141,13 @@ module.exports = class HandyBeeAdapter extends DatabaseAdapter {
   }
 
   async findResourceByName (name) {
-    return await this.getActiveMasterDatabase().findResourceByName(name)
+    const resource = await this.getActiveMasterDatabase().findResourceByName(name)
+
+    if (!resource || !resource.details) {
+      throw new Error(`Resource not found by resource name: ${name}`)
+    }
+
+    return resource
   }
 
   replicationSupported () {
