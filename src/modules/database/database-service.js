@@ -53,8 +53,8 @@ module.exports = class DatabaseService {
     return this.adapter.getResources({ resource })
   }
 
-  async findResourceByResourceKey (key) {
-    return await this.adapter.findResourceByResourceKey(key)
+  async findResourceByResourceKey (key, opts = {}) {
+    return await this.adapter.findResourceByResourceKey(key, opts)
   }
 
   async findResourceByName (key) {
