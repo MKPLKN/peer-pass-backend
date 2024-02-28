@@ -1,4 +1,4 @@
-const { getKeyChain } = require('p2p-auth')
+const { getKeyChain, generateKeyPairFromSeed } = require('p2p-auth')
 const { createSwarm } = require('p2p-resources')
 
 module.exports = class SwarmRepository {
@@ -26,7 +26,10 @@ module.exports = class SwarmRepository {
     const { name, dht } = attributes
 
     const db = this.databaseService.getActiveMasterDatabase()
-    const getKeyPair = (name) => getKeyChain(db.core.keyPair).get(name)
+    const getKeyPair = (name) => {
+      const seed = getKeyChain(db.core.keyPair).get(name).scalar
+      return { seed: seed.toString('hex'), keyPair: generateKeyPairFromSeed(seed) }
+    }
     const { details } = await createSwarm(db, { name, getKeyPair, dht })
 
     return { details }
