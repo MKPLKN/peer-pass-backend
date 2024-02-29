@@ -24,8 +24,15 @@ class SwarmModule {
   }
 }
 
+// @TODO: think better way to register modules event listeners
+const bootModule = () => (container) => {
+  const module = container.resolve('swarmModule')
+  module.registerEventListeners()
+}
+
 function registerModule (container) {
   container.register({
+    bootModuleSwarm: awilix.asFunction(bootModule).singleton(),
     swarmModule: awilix.asClass(SwarmModule).singleton(),
     swarmController: awilix.asClass(SwarmController).singleton(),
     swarmRepository: awilix.asClass(SwarmRepository).singleton(),

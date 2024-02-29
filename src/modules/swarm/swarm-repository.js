@@ -2,8 +2,8 @@ const { getKeyChain, generateKeyPairFromSeed } = require('p2p-auth')
 const { createSwarm } = require('p2p-resources')
 
 module.exports = class SwarmRepository {
-  constructor ({ databaseService }) {
-    this.databaseService = databaseService
+  constructor ({ swarmDatabaseService }) {
+    this.databaseService = swarmDatabaseService
   }
 
   get defaultKey () {
