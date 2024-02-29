@@ -6,6 +6,10 @@ module.exports = class InMemoryStorage extends IStorage {
     this.cache = new Map()
   }
 
+  has (key) {
+    return !!this.get(key)
+  }
+
   get (key) {
     const keys = key.split('.')
     let current = this.cache
