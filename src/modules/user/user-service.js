@@ -1,9 +1,10 @@
 const { createUser } = require('p2p-auth')
 
 module.exports = class UserService {
-  constructor ({ userRepository, userFactory }) {
+  constructor ({ userRepository, userFactory, createUserServices }) {
     this.repository = userRepository
     this.userFactory = userFactory
+    this.createServices = createUserServices
   }
 
   async create ({ username, password }) {
@@ -17,8 +18,8 @@ module.exports = class UserService {
   }
 
   async initializeSession ({ username, keyPair }) {
-    const { db } = await this.repository.initializeUserDatabases({ keyPair })
-    const user = this.make({ username, keyPair, db })
+    await this.createServices({ keyPair })
+    const user = this.make({ username, keyPair })
     this.setUser(user)
     return user
   }
