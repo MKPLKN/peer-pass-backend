@@ -16,16 +16,23 @@ const listenerManager = container.resolve('listenerManager')
  * Facades
  *
  */
+function getFacade (name) {
+  switch (name) {
+    case 'password':
+      return container.resolve('passwordFacade')
+    case 'rpc':
+      return container.resolve('rpcFacade')
+  }
+}
 const authFacade = container.resolve('authFacade')
 const userFacade = container.resolve('userFacade')
-const passwordFacade = container.resolve('passwordFacade')
 const databaseFacade = container.resolve('databaseFacade')
 module.exports = {
   eventService,
   listenerManager,
+  getFacade,
   authFacade,
   userFacade,
-  passwordFacade,
   databaseFacade,
   beforeStart
 }
