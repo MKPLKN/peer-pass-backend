@@ -17,6 +17,7 @@ function createApplication ({ ipcMain } = {}) {
     strict: true
   })
 
+  container.register({ container: awilix.asValue(container) })
   container.register({ ipc: awilix.asValue(ipcMain || {}) })
   registeEventModule(container)
   registerStorageModule(container, { storage: 'in-memory' })
@@ -30,14 +31,6 @@ function createApplication ({ ipcMain } = {}) {
 
   // Setup phase
   const setup = () => {
-    // Events
-    container.resolve('userModule').registerEventListeners()
-    container.resolve('swarmModule').registerEventListeners()
-    // Routes
-    container.resolve('authModule').registerRoutes()
-    container.resolve('userModule').registerRoutes()
-    container.resolve('passwordModule').registerRoutes()
-
     /**
      * WebSocket Example
      */
