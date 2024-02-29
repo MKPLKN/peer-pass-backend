@@ -15,10 +15,11 @@ test('user can replicate its database via Swarm', async (t) => {
   class MyFakeSwarmFactory extends FakeSwarmFactory {
     initializeSwarm (opts) {
       const swarm = new FakeSwarm(opts)
+      console.log('no?')
       swarm.join = (topic) => {
         t.alike(topic, db.topic, 'Joined to correct topic')
         const key = db.swarm.getAttributes('key')
-        databaseService.eventService.on(`swarm:${key}:joined:${db.topic.toString('hex')}`, ({ databaseModel }) => {
+        eventService.on(`swarm:${key}:joined:${db.topic.toString('hex')}`, ({ databaseModel }) => {
           t.alike(databaseModel.key, db.key, 'Database model is correct')
         })
         const dis = new FakeDiscovery()
@@ -32,19 +33,19 @@ test('user can replicate its database via Swarm', async (t) => {
   }
 
   const app = createTestApplication()
-  app.override('swarmFactory', awilix.asClass(MyFakeSwarmFactory).singleton(), { asIs: true })
-  app.setup()
+  app.override('swarmFactory', awilix.asClass(MyFakeSwarmFactory), { asIs: true })
 
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
   const eventService = app.container.resolve('eventService')
   const listenerManager = app.container.resolve('listenerManager')
-  const databaseService = app.container.resolve('databaseService')
-  const db = databaseService.getActiveDatabase({ model: true })
+  const databaseRegistry = app.container.resolve('databaseRegistry')
+  const db = databaseRegistry.getInstance('@password')
+  // console.log({ db, databaseRegistry })
 
   t.absent(db.swarm, 'User database has not swarm instance before replication')
   t.absent(db.replication_status, 'DBs replication status is absent before replication')
-  const response = await app.container.resolve('databaseController').replicate()
+  const response = await app.container.resolve('databaseController').replicate({ name: '@password' })
   t.ok(response.success, 'DB replication response is success')
 
   const socket = new FakeSocket()

@@ -1,12 +1,7 @@
 module.exports = class DatabaseService {
-  constructor ({ eventService, databaseFactory, databaseAdapter }) {
+  constructor ({ eventService, databaseAdapter }) {
     this.eventService = eventService
-    this.factory = databaseFactory
     this.adapter = databaseAdapter
-  }
-
-  async create (attribtues) {
-    return await this.factory.create(attribtues)
   }
 
   getActiveDatabase (opts = {}) {

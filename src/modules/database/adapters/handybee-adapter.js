@@ -1,17 +1,15 @@
 const DatabaseAdapter = require('./database-adapter')
 
 module.exports = class HandyBeeAdapter extends DatabaseAdapter {
-  constructor ({ storage, eventService, replicationManager }) {
+  constructor ({ db, replicationManager }) {
     super()
-    this.storage = storage
-    this.eventService = eventService
+    this.databaseModel = db
     this.replicationManager = replicationManager
   }
 
   getActiveDatabase (opts = {}) {
     const { model } = opts
-    const user = this.storage.get('user')
-    return model ? user.database : user.db
+    return model ? this.databaseModel : this.databaseModel.db
   }
 
   getActiveMasterDatabase () {
