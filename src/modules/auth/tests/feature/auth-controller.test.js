@@ -13,15 +13,13 @@ test('auth/login', async (t) => {
   await createUser({ username, password })
 
   const storage = app.container.resolve('storage')
+  const dbReg = app.container.resolve('databaseRegistry')
   t.absent(storage.get('user'))
   const response = await app.container.resolve('authController').login({ username, password })
   t.ok(response.success)
   const user = storage.get('user')
   t.ok(user)
-  t.ok(user.db)
-
-  // @TODO: Test the application does not use the user's master DB
-  // -
+  t.ok(dbReg.getInstance('@password'))
 
   await removeUsers()
 })
