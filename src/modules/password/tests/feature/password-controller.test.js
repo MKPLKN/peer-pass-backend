@@ -6,7 +6,7 @@ const app = createTestApplication()
 const username = 'test-user'
 const password = 'password'
 
-async function createPassword (attirbutes = {}) {
+async function createPassword (app, attirbutes = {}) {
   const { password } = await app.container.resolve('passwordController')
     .create({
       title: 'Test password',
@@ -49,7 +49,7 @@ test('password/update - user can update a password record', async (t) => {
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
 
-  const pwRecord = await createPassword()
+  const pwRecord = await createPassword(app)
 
   const newTitle = 'Updated Test Password'
   const response = await app.container.resolve('passwordController').update({
@@ -71,7 +71,7 @@ test('password/destroy - user can destroy a password record', async (t) => {
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
 
-  const pwRecord = await createPassword()
+  const pwRecord = await createPassword(app)
 
   const response = await app.container.resolve('passwordController').destroy({ id: pwRecord.id })
   t.ok(response.success, 'Password destory response is success')
@@ -86,14 +86,15 @@ test('password/destroy - user can destroy a password record', async (t) => {
 })
 
 test('password/index - user can view all its password records', async (t) => {
+  const app = createTestApplication()
   app.setup()
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
 
-  await createPassword({ title: 'Test password 1' })
-  await createPassword({ title: 'Test password 2' })
-  await createPassword({ title: 'Test password 3' })
-  await createPassword({ title: 'Test password 4' })
+  await createPassword(app, { title: 'Test password 1' }, app)
+  await createPassword(app, { title: 'Test password 2' }, app)
+  await createPassword(app, { title: 'Test password 3' }, app)
+  await createPassword(app, { title: 'Test password 4' }, app)
 
   const response = await app.container.resolve('passwordController').index()
   t.ok(response.items.length === 4, 'All passwords are returned')

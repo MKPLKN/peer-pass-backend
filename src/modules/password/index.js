@@ -6,11 +6,9 @@ const PasswordFactory = require('./password-factory')
 const PasswordFacade = require('./password-facade')
 
 class PasswordModule {
-  constructor ({ ipc, eventService, passwordService, passwordController }) {
+  constructor ({ ipc, eventService }) {
     this.ipc = ipc
     this.eventService = eventService
-    this.passwordService = passwordService
-    this.controller = passwordController
   }
 
   registerEventListeners () {

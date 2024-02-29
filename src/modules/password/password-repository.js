@@ -1,8 +1,8 @@
 module.exports = class PasswordRepository {
-  constructor ({ passwordFactory, databaseService }) {
+  constructor ({ passwordFactory, passwordDatabaseService }) {
     this.model = 'password'
     this.factory = passwordFactory
-    this.databaseService = databaseService
+    this.databaseService = passwordDatabaseService
   }
 
   async getAll (key = 'id') {
