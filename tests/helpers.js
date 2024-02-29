@@ -23,15 +23,15 @@ async function beforeEach (app) {
   await storage.clear()
 }
 
-async function removeUsers () {
+async function removeUsers (dir = './tests') {
   try {
     // Check if the platform is Windows
     if (process.platform === 'win32') {
       await execProm('rmdir /s /q .\\tests\\users')
       await execProm('rmdir /s /q .\\tests\\resources')
     } else {
-      await fs.rm('./tests/users', { recursive: true })
-      await fs.rm('./tests/resources', { recursive: true })
+      await fs.rm(`${dir}/users`, { recursive: true })
+      await fs.rm(`${dir}/resources`, { recursive: true })
     }
   } catch (error) { }
 }
