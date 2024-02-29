@@ -2,9 +2,9 @@ const { getKeyChain, generateKeyPairFromSeed } = require('p2p-auth')
 const { createNode } = require('p2p-resources')
 
 module.exports = class DHTRepository {
-  constructor ({ storage, databaseService }) {
+  constructor ({ storage, dhtDatabaseService }) {
     this.storage = storage
-    this.databaseService = databaseService
+    this.databaseService = dhtDatabaseService
   }
 
   get defaultKey () {

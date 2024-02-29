@@ -14,13 +14,13 @@ test('dht/create - it creates a new DHT node for the user', async (t) => {
   app.setup()
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
-  const user = app.container.resolve('userService').getUser()
+  const db = app.container.resolve('databaseRegistry').getInstance('@dht')
 
   const payload = { name: 'test-dht' }
   const response = await app.container.resolve('dhtController').create(payload)
   t.ok(response.success, 'DHT creation response is success')
 
-  const resource = await user.db.findResourceByName(payload.name)
+  const resource = await db.db.findResourceByName(payload.name)
   t.alike(payload.name, resource.details.name)
   t.alike(response.details.key, resource.details.key)
 
