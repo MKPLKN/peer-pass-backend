@@ -33,7 +33,7 @@ test('user can replicate its database via Swarm', async (t) => {
   }
 
   const app = createTestApplication()
-  app.override('swarmFactory', awilix.asClass(MyFakeSwarmFactory), { asIs: true })
+  app.override('swarmFactory', awilix.asClass(MyFakeSwarmFactory).singleton(), { asIs: true })
 
   await beforeEach(app)
   await freshUserSetup({ app, username, password })
