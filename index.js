@@ -21,7 +21,7 @@ function getFacade (name) {
     case 'password':
       return container.resolve('passwordFacade')
     case 'rpc':
-      return container.resolve('rpcFacade')
+      return null
   }
 }
 const authFacade = container.resolve('authFacade')
