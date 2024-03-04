@@ -15,7 +15,6 @@ test('user can replicate its database via Swarm', async (t) => {
   class MyFakeSwarmFactory extends FakeSwarmFactory {
     initializeSwarm (opts) {
       const swarm = new FakeSwarm(opts)
-      console.log('no?')
       swarm.join = (topic) => {
         t.alike(topic, db.topic, 'Joined to correct topic')
         const key = db.swarm.getAttributes('key')
@@ -41,7 +40,6 @@ test('user can replicate its database via Swarm', async (t) => {
   const listenerManager = app.container.resolve('listenerManager')
   const databaseRegistry = app.container.resolve('databaseRegistry')
   const db = databaseRegistry.getInstance('@password')
-  // console.log({ db, databaseRegistry })
 
   t.absent(db.swarm, 'User database has not swarm instance before replication')
   t.absent(db.replication_status, 'DBs replication status is absent before replication')
