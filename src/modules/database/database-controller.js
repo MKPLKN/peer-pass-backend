@@ -6,7 +6,7 @@ module.exports = class DatabaseController {
   }
 
   // @TODO: write tests
-  async getInfo (payload) {
+  async getInfo (payload = {}) {
     try {
       const { name } = payload
       const service = this.registry.getService(name)
@@ -20,9 +20,19 @@ module.exports = class DatabaseController {
   }
 
   async teardown (payload) {
-    const { name } = payload
-    const service = this.registry.getService(name)
-    await service.teardown()
+    try {
+      if (payload.name) {
+        const service = this.registry.getService(payload.name)
+        await service.teardown()
+      } else {
+        for await (const item of this.registry.storage.get('database.services')) {
+          const service = item[1]
+          await service.teardown()
+        }
+      }
+    } catch (error) {
+      this.logger.error(error.message)
+    }
   }
 
   async replicate (event = {}, payload) {

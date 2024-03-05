@@ -7,7 +7,7 @@ module.exports = class DatabaseFacade {
     return await this.controller.getInfo(payload)
   }
 
-  async teardown (payload) {
+  async teardown (payload = {}) {
     return await this.controller.teardown(payload)
   }
 
