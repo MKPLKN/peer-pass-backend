@@ -19,9 +19,13 @@ const listenerManager = container.resolve('listenerManager')
 function getFacade (name) {
   switch (name) {
     case 'password':
-      return container.resolve('passwordFacade')
+      return container.hasRegistration('passwordDatabaseService')
+        ? container.resolve('passwordFacade')
+        : null
     case 'rpc':
-      return null
+      return container.hasRegistration('dhtDatabaseService')
+        ? container.resolve('rpcFacade')
+        : null
   }
 }
 const authFacade = container.resolve('authFacade')
