@@ -7,7 +7,7 @@ module.exports = class AuthFacade {
     return await this.controller.login(payload)
   }
 
-  async create (payload) {
-    return await this.controller.login(payload)
+  async restore (payload) {
+    return await this.controller.restore(payload)
   }
 }
