@@ -8,6 +8,7 @@
     "test:user": "node src/modules/user/tests/all.js",
     "test:password": "node src/modules/password/tests/all.js",
     "test:dht": "node src/modules/dht/tests/all.js",
+    "test:rpc": "node src/modules/rpc/tests/all.js",
     "test:database": "node src/modules/database/tests/all.js",
     "test:generate": "brittle -r tests/all.js tests/*.js",
     "test:generate:modules": "brittle -r tests/all.js src/modules/*/tests/*/*.js",
@@ -15,6 +16,7 @@
     "test:generate:user": "brittle -r src/modules/user/tests/all.js src/modules/user/tests/*/*.js",
     "test:generate:password": "brittle -r src/modules/password/tests/all.js src/modules/password/tests/*/*.js",
     "test:generate:dht": "brittle -r src/modules/dht/tests/all.js src/modules/dht/tests/*/*.js",
+    "test:generate:rpc": "brittle -r src/modules/rpc/tests/all.js src/modules/rpc/tests/*/*.js",
     "test:generate:database": "brittle -r src/modules/database/tests/all.js src/modules/database/tests/*/*.js",
     "lint": "standard --fix"
   },
@@ -44,6 +46,7 @@
   },
   "overrides": {},
   "dependencies": {
+    "@hyperswarm/rpc": "^3.3.2",
     "awilix": "^10.0.1",
     "bare-events": "^2.2.0",
     "graceful-goodbye": "^1.3.0",

@@ -9,6 +9,7 @@ const { registerDatabaseModule } = require('./modules/database')
 const { registerDHTModule } = require('./modules/dht')
 const { registerSwarmModule } = require('./modules/swarm')
 const { beforeStart } = require('../tests/helpers')
+const { registerRPCModule } = require('./modules/rpc')
 // const { registerWsModule } = require('./modules/ws')
 
 function createApplication ({ ipcMain } = {}) {
@@ -19,6 +20,7 @@ function createApplication ({ ipcMain } = {}) {
 
   container.register({ container: awilix.asValue(container) })
   container.register({ ipc: awilix.asValue(ipcMain || {}) })
+
   registeEventModule(container)
   registerStorageModule(container, { storage: 'in-memory' })
   registerLoggerModule(container, { logger: 'winston' })
@@ -27,6 +29,7 @@ function createApplication ({ ipcMain } = {}) {
   registerDatabaseModule(container)
   registerPasswordModule(container)
   registerDHTModule(container)
+  registerRPCModule(container)
   registerSwarmModule(container)
 
   // Setup phase
