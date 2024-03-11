@@ -37,7 +37,7 @@
     "name": "MKPLKN",
     "email": "15703708+MKPLKN@users.noreply.github.com"
   },
-  "homepage": "https://github.com/MKPLKN/peer-pass#readme",
+  "homepage": "https://github.com/MKPLKN/peer-pass-backend#readme",
   "license": "Apache-2.0",
   "devDependencies": {
     "brittle": "^3.3.2",
