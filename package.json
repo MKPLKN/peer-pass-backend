@@ -41,12 +41,12 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "brittle": "^3.3.2",
-    "date-fns": "^2.30.0",
-    "date-fns-tz": "^2.0.0",
     "standard": "^17.1.0"
   },
   "overrides": {},
   "dependencies": {
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
     "@hyperswarm/rpc": "^3.3.2",
     "awilix": "^10.0.1",
     "bare-events": "^2.2.0",
